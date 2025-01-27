@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { ErrorMessage } from "formik";
 import s from "./ContactForm.module.css";
 import { useDispatch } from 'react-redux';
-import { addThunkContact } from '../../redux/contactsOps';
+import { addThunkContact } from '../../redux/contacts/operations';
 
 const initialValues = {
   name: "",
