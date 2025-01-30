@@ -21,11 +21,10 @@ const LoginPage = () => {
   });
 
   const dispatch = useDispatch();
-const navigate = useNavigate();
 
   const handleSubmit = (values, actions) => {
     try {
-      dispatch(loginUser(values)).unwrap().then(() => navigate('/')); 
+      dispatch(loginUser(values)); 
       console.log("Submitting login:", values);
       actions.resetForm();
       

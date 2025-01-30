@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addThunkContact, deleteThunkContact, fetchContacts } from './operations';
+import { addThunkContact, deleteThunkContact, editThunkContact, fetchContacts } from './operations';
 
 const slice = createSlice({
   name: 'contacts',
@@ -27,6 +27,11 @@ const slice = createSlice({
     })
     .addCase ( addThunkContact.fulfilled, (state, action) => {
       state.items.push(action.payload);
+    })
+    .addCase(editThunkContact.fulfilled, (state, action) => {
+      state.items = state.items.map((contact) =>
+        contact.id === action.payload.id ? action.payload : contact
+      );
     })
 
   }

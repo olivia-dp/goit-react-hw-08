@@ -1,6 +1,7 @@
-import axios from "axios";
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { goitApi } from '../auth/operations';
+import toast from "react-hot-toast";
 
 
 
@@ -20,6 +21,7 @@ export const deleteThunkContact = createAsyncThunk (
     "contacts/deleteContact", async (id, thunkAPI) => {
         try {
             const {data} = await goitApi.delete(`/contacts/${id}`);
+            toast.success("Контакт успішно видалено")
     return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -30,10 +32,24 @@ export const deleteThunkContact = createAsyncThunk (
 export const addThunkContact = createAsyncThunk(
     "contacts/addContact", async(body, thunkAPI) =>{
         try {
+
             const {data} = await goitApi.post("/contacts", body);
+            toast.success("Контакт успішно додано")
+
     return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
         }
+    }
+)
+
+export const editThunkContact =createAsyncThunk(
+    "contacts/editContact", async ({id, name, number}, thunkAPI) => {
+try {
+const {data} = await goitApi.patch(`/contacts/${id}`, {name, number});
+return data;
+} catch (e) {
+    return thunkAPI.rejectWithValue(e.message);
+}
     }
 )

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const goitApi = axios.create({
     baseURL: 'https://connections-api.goit.global',
@@ -20,30 +21,36 @@ export const loginUser = createAsyncThunk(
         try {
             const {data} = await goitApi.post("/users/login", credentials);
             setAuthHeader(data.token);
-            
             return data;
         
             
         } catch (e) {
-            return thunkAPI.rejectWithValue(e.message);
+          
+             if (e.response && e.response.status === 400) {
+              toast.error("Невірний логін або пароль")
+              
         }
+        return thunkAPI.rejectWithValue(e.message);
     }
-)
+})
 
 export const SignUpUser = createAsyncThunk(
     "users/signup", async (credentials, thunkAPI) => {
         try {
            const {data} = await goitApi.post("users/signup", credentials);
            setAuthHeader(data.token);
-           console.log(data);
            return data;
         } catch (e) {
+          if (e.response.data.code === 11000) {
+            toast.error("Користувач з таким email вже зареєстрований!")
+          }
+          
             return thunkAPI.rejectWithValue(e.message);
         }
     }
 )
 
-export const LogOutUser = createAsyncThunk(
+export const logOutUser = createAsyncThunk(
     "users/logout", async (_, thunkAPI) => {
         try {
         await  goitApi.post('users/logout');
@@ -53,3 +60,23 @@ export const LogOutUser = createAsyncThunk(
         }
     }
 )
+
+export const refreshUser = createAsyncThunk(
+    "auth/refreshUser",
+    async (_, thunkAPI) => {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+  
+      if (!token) {
+        return thunkAPI.rejectWithValue("No token found");
+      }
+  
+      try {
+        setAuthHeader(token);
+        const { data } = await goitApi.get("/users/current");
+        return data;
+      } catch (e) {
+        return thunkAPI.rejectWithValue(e.message) 
+      }
+    }
+  );
