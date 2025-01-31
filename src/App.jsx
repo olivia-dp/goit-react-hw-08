@@ -1,11 +1,13 @@
 
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import './App.css'
-import { lazy} from 'react'
+import { lazy, startTransition, Suspense, useEffect} from 'react'
 import { Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import PublicRoute from './components/PublicRoute/PublicRoute';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
+import { refreshUser } from './redux/auth/operations';
+import { selectIsRefreshing } from './redux/auth/selectors';
 
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -19,9 +21,13 @@ const RegistrationPage = lazy(() => import('./pages/RegistrationPage/Registratio
 
 function App() {
   const dispatch = useDispatch();
-
+  const isRefreshing = useSelector(selectIsRefreshing);
+useEffect(() => {
+    dispatch(refreshUser());
+}, [dispatch]);
  
-  return (
+  return isRefreshing ? null : (
+    <Suspense fallback={<p>Loading page...</p>}>
     <Routes >
       <Route path='/' element={ <Layout /> }>
         <Route index element={<HomePage />}></Route>
@@ -33,6 +39,7 @@ function App() {
         </Route>
         <Route path='*' element={<NotFoundPage/>} />
     </Routes>
+    </Suspense>
   )
 }
 
