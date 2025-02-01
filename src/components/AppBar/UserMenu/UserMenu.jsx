@@ -7,9 +7,9 @@ import { selectIsLoggedIn, selectUser } from "../../../redux/auth/selectors";
 
 
 const UserMenu = () => {
-  const user = useSelector(selectUser);
+  
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  
   
   return (
     <>
@@ -22,7 +22,7 @@ const UserMenu = () => {
               </button>
           
       </nav>
-      {isLoggedIn && <h2>WELCOME, {user.name}</h2>}
+      
     </>
   )
 }
