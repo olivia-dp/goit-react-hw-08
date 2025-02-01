@@ -8,6 +8,7 @@ import PublicRoute from './components/PublicRoute/PublicRoute';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
 import { refreshUser } from './redux/auth/operations';
 import { selectIsRefreshing } from './redux/auth/selectors';
+import { themeChange } from 'theme-change';
 
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
@@ -26,6 +27,7 @@ useEffect(() => {
     dispatch(refreshUser());
 }, [dispatch]);
  
+  
   return isRefreshing ? null : (
     <Suspense fallback={<p>Loading page...</p>}>
     <Routes >

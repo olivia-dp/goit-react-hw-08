@@ -37,7 +37,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div>
+    <div className='min-h-screen flex flex-col justify-center items-center'>
       <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FeedbackSchema}>
           <Form>
             <label>User name</label>
@@ -55,7 +55,7 @@ const RegistrationPage = () => {
             <button type="submit">Register</button>
 
             <p>
-              Have an account? <Link to="/login">Log in</Link>
+              Have an account? <Link className='text-teal-500' to="/login">Log in</Link>
             </p>
           </Form>
       </Formik>
