@@ -17,7 +17,7 @@ const setAuthHeader = (token) => {
 
 
 export const loginUser = createAsyncThunk(
-    "users/login", async ( credentials, thunkAPI) => {
+    "auth/login", async ( credentials, thunkAPI) => {
         try {
             const {data} = await goitApi.post("/users/login", credentials);
             setAuthHeader(data.token);
@@ -35,7 +35,7 @@ export const loginUser = createAsyncThunk(
 })
 
 export const SignUpUser = createAsyncThunk(
-    "users/signup", async (credentials, thunkAPI) => {
+    "auth/register", async (credentials, thunkAPI) => {
         try {
            const {data} = await goitApi.post("users/signup", credentials);
            setAuthHeader(data.token);
@@ -51,7 +51,7 @@ export const SignUpUser = createAsyncThunk(
 )
 
 export const logOutUser = createAsyncThunk(
-    "users/logout", async (_, thunkAPI) => {
+    "auth/logout", async (_, thunkAPI) => {
         try {
         await  goitApi.post('users/logout');
         clearAuthHeader() 
@@ -62,7 +62,7 @@ export const logOutUser = createAsyncThunk(
 )
 
 export const refreshUser = createAsyncThunk(
-    "auth/refreshUser",
+    "auth/refresh",
     async (_, thunkAPI) => {
       const savedToken = thunkAPI.getState().auth.token;
       
