@@ -1,4 +1,4 @@
-import s from "./SearchBox.module.css"
+
 import { changeFilter } from "../../redux/filters/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilter } from "../../redux/filters/selectors";
@@ -12,12 +12,12 @@ const dispatch = useDispatch();
     dispatch(changeFilter(e.target.value));
   };
     return (
-        <>
-        <label className={s.label}>
-          <span className={s.span}>Find contacts by name:</span>
-                <input className={s.input} type='text' value={filter} onChange={handleChange}/>
+        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <label className="input w-full">
+        <span className="leading-tight tracking-tight text-gray-900 dark:text-white">Find contacts by name:</span>
+                <input type='text' value={filter} onChange={handleChange}/>
         </label>
-        </>
+        </div>
     )
 };
 

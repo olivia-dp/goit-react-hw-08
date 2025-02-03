@@ -12,13 +12,13 @@ const ContactsPage = () => {
         dispatch(fetchContacts())
       }, [dispatch])
       return (
-        <>
-          <h1>Phonebook</h1>
+        <div className="p-5">
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Phonebook</h1>
           <ContactForm/>
           <SearchBox/>
           
           <ContactList/>
-        </>
+        </div>
       ) 
     }
     

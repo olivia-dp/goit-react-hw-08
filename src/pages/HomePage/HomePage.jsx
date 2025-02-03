@@ -10,20 +10,19 @@ const HomePage = () => {
   return (
     <div>
       <div
-  class="hero min-h-screen"
+  className="hero min-h-210"
   style={{
     backgroundImage: "url(https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_1280.jpg)",
   }}>
   <div className="hero-overlay"></div>
   <div className="hero-content text-neutral-content text-center">
           <div className="max-w-md">
-            {isLoggedIn && <h2>WELCOME, {user.name}</h2>}
+            {isLoggedIn && <h2>Welcome, {user.name}!</h2>}
       <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
       <p className="mb-5">
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-        quasi. In deleniti eaque aut repudiandae et a id nisi.
+        Take advantage of the possibilities of using the telephone directory, which is always at hand
       </p>
-      {isLoggedIn ? <Link className="btn btn-primary" link to="/contacts">Контакты</Link> : <Link className="btn btn-primary" link to="/login">Вход</Link> }
+      {isLoggedIn ? <Link className="btn btn-primary" link to="/contacts">Contacts</Link> : <Link className="btn btn-primary" link to="/login">Login</Link> }
     </div>
   </div>
 </div>
@@ -33,10 +32,10 @@ const HomePage = () => {
   </aside>
   <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
     <a href="https://www.linkedin.com/in/olga-usatenko/" target="_blank"> 
-      <FaLinkedin />
+      <FaLinkedin className="w-7 h-7"/>
     </a>
-    <a href="https://www.linkedin.com/in/olga-usatenko/" target="_blank">
-      <FaGithub />
+    <a href="https://github.com/olivia-dp" target="_blank">
+      <FaGithub className="w-7 h-7"/>
     </a>
   </nav>
 </footer>

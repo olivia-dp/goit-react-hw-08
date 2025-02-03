@@ -21,7 +21,7 @@ export const deleteThunkContact = createAsyncThunk (
     "contacts/deleteContact", async (id, thunkAPI) => {
         try {
             const {data} = await goitApi.delete(`/contacts/${id}`);
-            toast.success("Контакт успішно видалено")
+            toast.success("Contact deleted!")
     return data;
         } catch (e) {
             return thunkAPI.rejectWithValue(e.message);
@@ -34,7 +34,7 @@ export const addThunkContact = createAsyncThunk(
         try {
 
             const {data} = await goitApi.post("/contacts", body);
-            toast.success("Контакт успішно додано")
+            toast.success("Contact added succesfully!")
 
     return data;
         } catch (e) {

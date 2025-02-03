@@ -1,7 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from "yup";
 import { ErrorMessage } from "formik";
-import s from "./ContactForm.module.css";
 import { useDispatch } from 'react-redux';
 import { addThunkContact } from '../../redux/contacts/operations';
 
@@ -11,13 +10,13 @@ const initialValues = {
 };
 
 const ContactForm = () => {
-  const FeedbackSchema = Yup.object().shape({
+  const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
     number: Yup.string()
-      .matches(/^\d+$/, "Number must contain only digits") // Проверка только чисел
+      .matches(/^\d+$/, "Number must contain only digits")
       .min(3, "Too Short!")
       .max(15, "Too Long!")
       .required("Required"),
@@ -38,17 +37,20 @@ const handleSubmit = (values, actions) => {
 
 
   return (
-      <Formik initialValues={ initialValues } onSubmit={handleSubmit} validationSchema={FeedbackSchema} >
-        <Form className={s.form}>
-          <label>Name</label>
-          <Field type="text" name="name" className={s.field} />
-          <ErrorMessage name="name" component="span" className={s.error} />
-          <label>Number</label>
-          <Field type="number" name="number" className={s.field} />
-          <ErrorMessage name="number" component="span" className={s.error}/>
-          <button type="submit" className={s.button}>Add contact</button>
-  			</Form>
-      </Formik>
+      <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <Formik initialValues={ initialValues } onSubmit={handleSubmit} validationSchema={validationSchema} >
+          <Form className="space-y-4 md:space-y-6">
+            <label className="input w-full">Name
+            <Field type="text" name="name" /></label>
+          <ErrorMessage name="name" component="span" className="alert alert-error alert-dash"/>
+          
+            <label className="input w-full">Number
+            <Field type="number" name="number" /></label>
+            <ErrorMessage name="number" component="span" className="alert alert-error alert-dash"/>
+            <button type="submit" className="w-full btn btn-soft btn-accent">Add contact</button>
+    			</Form>
+        </Formik>
+      </div>
     
   );
 };

@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { loginUser } from "../../redux/auth/operations";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const initialValues = {
   email: "",
@@ -71,7 +71,7 @@ const LoginPage = () => {
                   <button type="submit" className="w-full btn btn-soft btn-accent">Login</button>
       
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                    Don't have an account yet?<Link to="/register" className="w-full text-teal-500 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Register</Link>
+                    Don't have an account yet?<Link to="/register" className="w-full text-teal-500 bg-primary-600 hover:bg-primary-700 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700">Register</Link>
                   </p>
                 </Form>
             </Formik>
